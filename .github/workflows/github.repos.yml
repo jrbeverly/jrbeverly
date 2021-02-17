@@ -1,0 +1,17 @@
+name: Sync GitHub Repositories
+on:
+  issues:
+  push:
+    paths:
+      - .github/workflows/github.repos.yml
+      - .github/actions/github-repositories/*
+
+jobs:
+  github:
+    name: SyncRepositories
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@1.0.0
+      - uses: ./.github/actions/github-repositories
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
